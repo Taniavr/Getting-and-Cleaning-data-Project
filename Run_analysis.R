@@ -1,15 +1,15 @@
 
 ##Read files
-testY = read.table("./UCI HAR Dataset/test/Y_test.txt", head=FALSE)
-testX = read.table("./UCI HAR Dataset/test/X_test.txt", head=FALSE)
-subject_test = read.table("./UCI HAR Dataset/test/subject_test.txt", head=FALSE)
+testY = read.table("/users/taniavr84/RCoursera/UCI HAR Dataset/test/Y_test.txt", head=FALSE)
+testX = read.table("/users/taniavr84/RCoursera/UCI HAR Dataset/test/X_test.txt", head=FALSE)
+subject_test = read.table("/users/taniavr84/RCoursera/UCI HAR Dataset/test/subject_test.txt", head=FALSE)
 
-trainX =read.table("./UCI HAR Dataset/train/X_train.txt", head=FALSE)
-trainY =read.table("./UCI HAR Dataset/train/Y_train.txt", head=FALSE)
-subject_train =read.table("./UCI HAR Dataset/train/subject_train.txt", head=FALSE)
+trainX =read.table("/users/taniavr84/RCoursera/UCI HAR Dataset/train/X_train.txt", head=FALSE)
+trainY =read.table("/users/taniavr84/RCoursera/UCI HAR Dataset/train/Y_train.txt", head=FALSE)
+subject_train =read.table("/users/taniavr84/RCoursera/UCI HAR Dataset/train/subject_train.txt", head=FALSE)
 
-features = read.table("./UCI HAR Dataset/features.txt", head=FALSE)
-activity_labels = read.table("./UCI HAR Dataset/activity_labels.txt", col.names = c("ActivityID", "Activity"))
+features = read.table("/users/taniavr84/RCoursera/UCI HAR Dataset/features.txt", head=FALSE)
+
 
 
 ##concatenates the test set and the train set.
@@ -30,6 +30,9 @@ Data <- cbind(Subjectdata, Labeldata, Alldata)
 
 ## Extracting only the variables that contain mean and std:
 Data1  <- Data[,grepl("mean\\(\\)|std\\(\\)|subjectID|ActivityID", names(Data))]
+
+## Loads the activity_labels file and renames the two columns
+activity_labels = read.table("/users/taniavr84/RCoursera/UCI HAR Dataset/activity_labels.txt", col.names = c("ActivityID", "Activity"))
 
 ##adds descriptive activity name to Data1
 Data2  <- join(Data1, activity_labels, by="ActivityID", match = "first")
