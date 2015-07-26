@@ -1,0 +1,64 @@
+---
+title: "CodeBook"
+output: html_document
+---
+
+The TidyDataSet.txt data set contains the following variables calculated from the raw data obtained form: 
+        http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones 
+
+The raw data sets were processed with the script Run_analysis.R to obtain a tidy data  set that calculates the average of each activity for each individual
+The final tidy data set shows the average of each variable for each activity and each subject.
+
+In the data includes:
+ - An identifier of the subject who carried out the experiment: subjects 1 to 30
+ - A descriptive activity label:  
+        1 WALKING
+        2 WALKING_UPSTAIRS
+        3 WALKING_DOWNSTAIRS
+        4 SITTING
+        5 STANDING
+        6 LAYING
+
+ - A vector with time and frequency domain variables (the tidy data set only extracts the mean and std; other calculations where made in the original data):
+ tBodyAcc-XYZ
+tGravityAcc-XYZ
+tBodyAccJerk-XYZ
+tBodyGyro-XYZ
+tBodyGyroJerk-XYZ
+tBodyAccMag
+tGravityAccMag
+tBodyAccJerkMag
+tBodyGyroMag
+tBodyGyroJerkMag
+fBodyAcc-XYZ
+fBodyAccJerk-XYZ
+fBodyGyro-XYZ
+fBodyAccMag
+fBodyAccJerkMag
+fBodyGyroMag
+fBodyGyroJerkMag
+
+
+The run_analysis.R script does the following:
+The dplyr package needs to be loades
+
+First loads the raw data files. 
+1. Merges the training and the test sets to create one data set:
+```Subjectdata  <- rbind(subject_test, subject_train)```
+
+```Alldata  <- rbind(testX, trainX)```
+```Labeldata  <- rbind(testY, trainY)```
+
+Then labels the subjects with "subjectID", the activity with "activityID", and labels the variables with  the features names from the original file features.txt
+
+2. Extracts only the measurements on the mean and standard deviation for each measurement
+After combining the 3 tables in to Data, it extracts only the names of the variables that contain mean and std and it stores it in Data1.
+
+3. Using join() it adds the activity labels to Data1 and it stores the results in Data2
+It also removes one extra column with the activity number identifier that we no longer need, and finally it reorder to columns so that "Activity" is the second variable in the table.
+
+4. The labels are replaced with more descriptive labels (i.e "Acc" with Acceleration)
+
+5. A second tidy data set was created calculatig the of each variable for each activity and each subject it is stores in Data_mean. This last data set consists of 180 observations and 68 variables. Finally it creates the TidyDataSet.txt file.
+- 
+
